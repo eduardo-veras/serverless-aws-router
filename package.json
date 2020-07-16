@@ -1,0 +1,29 @@
+{
+	"name": "serverless-aws-router",
+	"description": "Minimalist serverless router system for Node.JS",
+	"version": "1.0.0",
+	"repository": "https://github.com/eduardo-veras/serverless-aws-router",
+	"main": "lib/index.js",
+	"engines": {
+		"node": ">=12.0.0"
+	},
+	"files": [
+		"lib"
+	],
+	"keywords": [
+		"serverless",
+		"aws",
+		"routing",
+		"http",
+		"api",
+		"web"
+	],
+	"dependencies": {
+		"@hapi/joi": "17.x.x",
+		"jsonwebtoken" : "8.x.x",
+		"path-match": "1.x.x",
+		"qs": "6.x.x"
+	},
+	"devDependencies": { },
+	"license": "Apache-2.0"
+}
