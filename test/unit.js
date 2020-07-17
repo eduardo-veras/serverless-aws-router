@@ -1,11 +1,21 @@
 process.env.NODE_ENV = 'test';
 
+const { exec } = require('child_process');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const should = chai.should();
 
-
 chai.use(chaiHttp);
+
+const msleep = ms => { Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms); };
+
+const subprocess = exec('sls offline start --config test/src/serverless.yml');
+before(function (done) {
+	subprocess.stdout.on('data', (data) => {
+		if(data.indexOf('server ready')>0)
+			done();
+	});
+});
 
 describe('GET /', () => {
 	it('it should have status 200', (done) => {
@@ -29,3 +39,8 @@ describe('GET /', () => {
 	});
 });
 
+after(function () {
+	subprocess.kill();
+	msleep(500);
+	process.kill(subprocess.pid+1); //sls offline will spawn a new process on 1st kill
+});

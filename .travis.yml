@@ -10,7 +10,13 @@ node_js:
 
 sudo: false
 
-script: 
-    - npm install -g serverless
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install -g serverless
+
+script:
     - npm install
-    - sls offline start --config test/src/serverless.yml
+    - npm test
