@@ -30,4 +30,4 @@ server.route({
 });
 
 
-module.exports.server = server.handler;
+module.exports.handler = (event, context, callback) => { return server.handler(event, context, callback) };

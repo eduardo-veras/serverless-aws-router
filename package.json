@@ -24,6 +24,14 @@
 		"path-match": "1.x.x",
 		"qs": "6.x.x"
 	},
-	"devDependencies": { },
+	"devDependencies": {
+		"chai": "4.x.x",
+		"chai-http": "4.x.x",
+		"mocha": "8.x.x",
+		"serverless-offline": "6.x.x"
+	},
+	"scripts": {
+		"test" : "./node_modules/mocha/bin/mocha test/unit.js --timeout 10000"
+	},
 	"license": "Apache-2.0"
 }

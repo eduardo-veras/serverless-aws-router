@@ -9,13 +9,13 @@ provider:
   region: us-east-1
   environment:
     STAGE: ${self:provider.stage}
-    JWT_ISSUER: ${file(./.env.yml):${self:provider.stage}.JWT_ISSUER}
-    JWT_SECRET: ${file(./.env.yml):${self:provider.stage}.JWT_SECRET}
+    JWT_ISSUER: ${file(./test/src/.env.yml):${self:provider.stage}.JWT_ISSUER}
+    JWT_SECRET: ${file(./test/src/.env.yml):${self:provider.stage}.JWT_SECRET}
 
 
 functions:
   app:
-    handler: server.handler
+    handler: test/src/server.handler
     events:
       - http:
           path: /
@@ -49,3 +49,12 @@ resources:
         RestApiId:
           Ref: 'ApiGatewayRestApi'
         StatusCode: '401'
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    host: 0.0.0.0
+    httpPort: 8080
+    noPrependStageInUrl : true
