@@ -100,5 +100,5 @@ describe('GET /auth', () => {
 
 after(function () {
 	subprocess.kill();
-	process.kill(subprocess.pid+1);
+	try{ process.kill(subprocess.pid+1); } catch(e){} //Only necessary on linux
 });

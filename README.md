@@ -1,4 +1,7 @@
 # serverless-aws-router
+
+[![Build Status: Linux](https://travis-ci.org/eduardo-veras/serverless-aws-router.svg?branch=master)](https://travis-ci.com/github/eduardo-veras/serverless-aws-router)
+
 This project aim to be a lightweight router system for [Serverless framework](https://serverless.com) for AWS Lambda. The code design was inspirated on [Hapi](https://hapi.dev) framework, and try to mimic the routes, validations, requests and response models of traditional NodeJS router frameworks.
 
 
