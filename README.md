@@ -232,3 +232,4 @@ Next steps on this project:
 - [ ] Documentation for the `config` object;
 - [ ] Documentation for the `handler` function;
 - [ ] Add global Auth registrations
+- [ ] Validate if a route is already registered before add
