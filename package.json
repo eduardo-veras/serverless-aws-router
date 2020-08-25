@@ -3,9 +3,6 @@
 	"description": "Minimalist serverless router system for Node.JS",
 	"version": "1.0.0",
 	"repository": "https://github.com/eduardo-veras/serverless-aws-router",
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	},
 	"main": "lib/index.js",
 	"engines": {
 		"node": ">=12.0.0"
@@ -22,12 +19,12 @@
 		"web"
 	],
 	"dependencies": {
-		"@hapi/joi": "17.x.x",
 		"jsonwebtoken" : "8.x.x",
 		"path-match": "1.x.x",
 		"qs": "6.x.x"
 	},
 	"devDependencies": {
+		"joi": "17.x.x",
 		"chai": "4.x.x",
 		"chai-http": "4.x.x",
 		"mocha": "8.x.x",

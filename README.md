@@ -58,8 +58,9 @@ All HTTP endpoints paths and methods, are pointed to the `server.handler`, which
 'use strict';
 
 const slsRouter = require('serverless-aws-router');
+const Joi = require('joi');
 
-const server = new slsRouter.Server({});
+const server = new slsRouter.Server({ Joi });
 
 server.route({
 	method: 'GET',
@@ -72,6 +73,8 @@ server.route({
 module.exports.handler = (event, context, callback) => server.handler(event, context, callback);
 ```
 First create a new `slsRouter.Server()`, then add your routes to the server, and finally export the `server.handler()` that will receive the serverless requests.
+
+To avoid versioning problems between the Joi library, add the [Joi](https://www.npmjs.com/package/joi) package globally in you project, and pass it when you are creating a new server.
 
 ## Adding Routes
 There are three ways to add routes to your system.
@@ -216,11 +219,16 @@ server.route({
 Now if you request `/hello/sloan` will reply with `Hello sloan!` and a request to `/hello` will reply with `Hello stranger!`.
 
 #### config `object (optional)`
-config
-config.auth
-config.validate
+Each route can be configured to define authentication and validation rules for requests.
 
-#### handler `async function`
+##### config.auth `async function (optional)`
+Build-in 
+ - `false` to disable authentication (*default*);
+ - `function`
+
+##### config.validate
+
+#### handler `(async) function`
 ##### request
 ##### reply
 
