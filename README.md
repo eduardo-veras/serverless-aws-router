@@ -339,7 +339,7 @@ return reply.response([ 1, 2, 3 ]);
 ```
 
 
-`raw()` (optional) v1.0.7+
+`raw()` (optional) v1.0.5+
 
 Prevent the content to be encapsulated in the response interface, the content will still be converted using `JSON.stringify()`. It can e used before or after the `response()`.
 
