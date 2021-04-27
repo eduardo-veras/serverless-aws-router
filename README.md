@@ -315,6 +315,7 @@ server.route({
 
 All methods are chained, so it can be used in any order.
 
+<br>
 
 `response(body: any)` (mandatory)
 
@@ -338,6 +339,7 @@ return reply.response([ 1, 2, 3 ]);
 // { "statusCode": 200, "response": [ 1, 2, 3 ] }
 ```
 
+<br>
 
 `raw()` (optional) v1.0.5+
 
@@ -352,7 +354,8 @@ return reply.response({ test : true }).raw();
 // { "test" : true }
 ```
 
-
+<br>
+<br>
 
 `code(codeValue: number)` (optional)
 
@@ -385,7 +388,8 @@ return reply.code(417).response('Hello world');
 // { "statusCode": 200, "error": "Expectation Failed", "message": "Hello world" }
 ```
 
-
+<br>
+<br>
 
 `type(contentType: string)` (optional)
 
@@ -397,7 +401,8 @@ Default value: `application/json`
 return reply.type('text/html').raw().response('<html><h1>Hello world</h1></html>');
 ```
 
-
+ <br>
+ <br>
 
 `header(key: string, value: string)` (optional)
 
