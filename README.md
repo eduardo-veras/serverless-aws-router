@@ -80,7 +80,7 @@ The server options control the behavior of the server object.
 ##### server.options.Joi `object | mandatory`
 To avoid versioning problems between the Joi library, add the [Joi](https://www.npmjs.com/package/joi) package globally in you project, and pass it when you are creating a new server.
 
-##### server.options.wrapResponse `boolean | optional`
+##### server.options.wrapResponse `boolean | optional` (v1.0.7+)
 Default value: `true`
 
 Used to indicate if all responses data should be wraped before the final response.
@@ -441,6 +441,40 @@ Set custom **response headers**.
 
 ```javascript
 return reply.type('x-key', 'abcdef').response('Hello world');
+```
+## Request Lifecycle
+
+![image](https://user-images.githubusercontent.com/12535965/118333232-5b718000-b4d9-11eb-908e-ee1928e1bb87.png)
+
+## Events (v1.0.7+)
+
+The events listed on the request lifecycle can be binded on the `server` level, using the method `on(criteria, listener)` as:
+```javascript
+const server = new slsRouter.Server({ Joi : require('joi') });
+
+server.on('onEvent', async event => {
+  console.log('onEvent', event);
+});
+
+server.on('onRequest', async request => {
+  console.log('onRequest', request);
+});
+
+server.on('onPostAuth', async request => {
+  console.log('onPostAuth',request);
+});
+
+server.on('onPreHandler', async request => {
+  console.log('onPreHandler', request);
+});
+
+server.on('onPostHandler', async payload => {
+  console.log('onPostHandler', payload);
+});
+
+server.on('onPreResponse', async response => {
+  console.log('onPreResponse', response);
+});
 ```
 
 
