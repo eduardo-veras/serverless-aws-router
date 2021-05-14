@@ -53,7 +53,7 @@ functions:
 ```
 All HTTP endpoints paths and methods, are pointed to the `server.handler`, which will call the exported method `handler` at the `server.js` file. 
 
-### server.js
+### Server({ options })
 ```javascript
 'use strict';
 
@@ -74,7 +74,38 @@ module.exports.handler = (event, context, callback) => server.handler(event, con
 ```
 First create a new `slsRouter.Server()`, then add your routes to the server, and finally export the `server.handler()` that will receive the serverless requests.
 
+#### Server Options
+The server options control the behavior of the server object.
+
+##### server.options.Joi `object | mandatory`
 To avoid versioning problems between the Joi library, add the [Joi](https://www.npmjs.com/package/joi) package globally in you project, and pass it when you are creating a new server.
+
+##### server.options.wrapResponse `boolean | optional`
+Default value: `true`
+
+Used to indicate if all responses data should be wraped before the final response.
+
+If set to `false` the `reply` will always act as `reply.raw().response(content)`.
+
+##### server.options.auth `object | optional`
+Default value: `{ method : 'jwt', function : null }`
+
+Sets the default method to be used to authenticated requests.
+
+###### server.options.auth.method `string | mandatory`
+Default value: `jwt`
+
+Define the authorization method, which can be:
+
+ - `jwt` - by default the server will use JWT to authenticate and validate requests.
+ - `custom` - sets authorization to use a custom function to authenticate requests. This method will only work togheter with the `function` option.
+
+###### server.options.auth.function `async function(event, route, request) | optional`
+Default value: `null`
+
+This option will only work when the `method` is set to `custom`, and the function must return:
+ - `null` - if the authorization fails.
+ - `object` - an object with the will be saved (shallowly copied) into `request.auth.credentials` and will set `request.auth.isAuthenticated` to `true`. 
 
 ## Adding Routes
 There are three ways to add routes to your system.
@@ -169,7 +200,7 @@ module.exports.handler = (event, context, callback) => server.handler(event, con
 ```
 The `server.loadRoutes()` will search on the `routes` directory for `*.js` files that have the `register` function on it (as presented at the `route.js` example). By default, this method will search only for routes on the same folder, but you can set the `recursive : true` flag to inform the loader, to search for `.js` route files in all sub-directories.
 
-### Routes
+### route({ options })
 When you add a new route, you need three basic elements: the `method`, the `path`, and a `handler`. These are passed to your server as an object, and ca be as simple as the follwing:
 ```javascript
 server.route({
@@ -180,7 +211,7 @@ server.route({
 	}
 });
 ```
-#### method `string | array<strings>`
+#### route.options.method `string | array<strings>`
 The method opetion can be any valid HTTP method. The route above responds to a single method `GET`, but you can also define multiple by passing an array of strings.
 ```javascript
 server.route({
@@ -191,7 +222,7 @@ server.route({
 	}
 });
 ```
-#### path `string`
+#### route.options.path `string`
 The path option must be a string, though it can contain named parameters. To name a parameter in a path, simply put `:` at the begin. For example:
 ```javascript
 server.route({
@@ -218,17 +249,17 @@ server.route({
 ```
 Now if you request `/hello/sloan` will reply with `Hello sloan!` and a request to `/hello` will reply with `Hello stranger!`.
 
-#### config `object (optional)`
+#### route.options.config `object (optional)`
 Each route can be configured to define authentication and validation rules for requests.
 
-##### config.auth `async function (optional)`
+##### route.options.config.auth `async function (optional)`
 Build-in 
  - `false` to disable authentication (*default*);
  - `function`
 
-##### config.validate
+##### route.options.config.validate
 
-#### handler `(async) function`
+#### route.options.handler `(async) function`
 The route handler function performs the main business logic of the route and sets the response.
 
 It can be a normal function:
