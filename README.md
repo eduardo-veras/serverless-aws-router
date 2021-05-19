@@ -472,7 +472,8 @@ server.on('onPostHandler', async payload => {
   console.log('onPostHandler', payload);
 });
 
-server.on('onPreResponse', async response => {
+server.on('onPreResponse', async (response, event) => {
+  console.log('onPreResponse', event);
   console.log('onPreResponse', response);
 });
 ```
@@ -480,10 +481,3 @@ server.on('onPreResponse', async response => {
 
 ## Examples
 You can find some usage examples on the [test](/test) folder on this repo.
-
-## To do
-Next steps on this project:
-- [ ] Documentation for the `config` object;
-- [ ] Documentation for the `handler` function;
-- [ ] Add global Auth registrations
-- [ ] Validate if a route is already registered before add

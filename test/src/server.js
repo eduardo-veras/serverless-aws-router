@@ -31,7 +31,7 @@ server.on('onPostHandler', async payload => {
 	console.log('onPostHandler', payload);
 });
 
-server.on('onPreResponse', async response => {
+server.on('onPreResponse', async (response, event) => {
 	console.log('onPreResponse', response);
 });
 */
