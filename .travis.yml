@@ -13,7 +13,7 @@ cache:
     - node_modules
 
 install:
-  - npm install -g serverless
+  - npm install -g serverless@2.43.0
 
 script:
     - npm install

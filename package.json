@@ -19,19 +19,19 @@
 		"web"
 	],
 	"dependencies": {
-		"jsonwebtoken" : "8.x.x",
+		"jsonwebtoken": "8.x.x",
 		"path-match": "1.x.x",
 		"qs": "6.x.x"
 	},
 	"devDependencies": {
-		"joi": "17.x.x",
 		"chai": "4.x.x",
 		"chai-http": "4.x.x",
+		"joi": "17.x.x",
 		"mocha": "8.x.x",
-		"serverless-offline": "6.x.x"
+		"serverless-offline": "7.x.x"
 	},
 	"scripts": {
-		"test" : "./node_modules/mocha/bin/mocha test/unit.js --timeout 30000 --exit"
+		"test": "./node_modules/mocha/bin/mocha test/unit.js --timeout 30000 --exit"
 	},
 	"license": "Apache-2.0"
 }
