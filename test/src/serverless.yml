@@ -7,6 +7,9 @@ provider:
   timeout: 30
   stage: 'sample'
   region: us-east-1
+  lambdaHashingVersion: 20201221
+  apiGateway:
+    shouldStartNameWithService: true
   environment:
     STAGE: ${self:provider.stage}
     JWT_ISSUER: ${file(./test/src/.env.yml):${self:provider.stage}.JWT_ISSUER}
