@@ -80,6 +80,11 @@ The server options control the behavior of the server object.
 ##### server.options.Joi `object | mandatory`
 To avoid versioning problems between the Joi library, add the [Joi](https://www.npmjs.com/package/joi) package globally in you project, and pass it when you are creating a new server.
 
+##### server.options.validationAllowUnknown `boolean | optional` (v1.0.10+)
+Default value: `false`
+
+When `true`, allows `Joi` validation object to contain unknown keys which are ignored.
+
 ##### server.options.wrapResponse `boolean | optional` (v1.0.7+)
 Default value: `true`
 

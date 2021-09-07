@@ -3,7 +3,7 @@
 const slsRouter = require('../../lib');
 const path = require('path');
 
-const server = new slsRouter.Server({ Joi : require('joi') });
+const server = new slsRouter.Server({ Joi : require('joi'), validationAllowUnknown: true });
 
 
 server.loadRoutes(path.join(__dirname, 'routes'), { recursive : true });
