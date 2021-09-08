@@ -48,6 +48,44 @@ describe('GET /', () => {
 	});
 });
 
+describe('GET /validation', () => {
+	it('it should have status 412', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/validation')
+			.end((err, res) => {
+				res.should.have.status(412);
+				done();
+			});
+	});
+	it('it should have status 200', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/validation?page=1')
+			.end((err, res) => {
+				res.should.have.status(200);
+				done();
+			});
+	});
+});
+
+describe('GET /validationSchema', () => {
+	it('it should have status 412', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/validationSchema')
+			.end((err, res) => {
+				res.should.have.status(412);
+				done();
+			});
+	});
+	it('it should have status 200', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/validationSchema?page=1')
+			.end((err, res) => {
+				res.should.have.status(200);
+				done();
+			});
+	});
+});
+
 describe('GET /auth', () => {
 	it('no token, it should return status 401', (done) => {
 		chai.request('http://localhost:8080')

@@ -1,5 +1,6 @@
 "use strict";
 
+const Joi = require('joi');
 
 module.exports.register = (server) => {
 
@@ -8,6 +9,33 @@ module.exports.register = (server) => {
 		path: '/',
 		handler: async (request, reply) => {
 			return reply.response({ Hello : "World!" });
+		}
+	});
+
+
+	server.route({
+		method: 'GET',
+		path: '/validation',
+		config: {
+			validate:{
+				query: { page : Joi.number().required() }
+			}
+		},
+		handler: async (request, reply) => {
+			return reply.response({ ok: true });
+		}
+	});
+
+	server.route({
+		method: 'GET',
+		path: '/validationSchema',
+		config: {
+			validate:{
+				query: Joi.object({ page : Joi.number().required() })
+			}
+		},
+		handler: async (request, reply) => {
+			return reply.response({ ok: true });
 		}
 	});
 

@@ -61,12 +61,12 @@ const slsRouter = require('serverless-aws-router');
 const Joi = require('joi');
 
 const server = new slsRouter.Server({
-	Joi,
-	validationAllowUnknown: false,  //Optional, default false
-	wrapResponse: true,				//Optional, default true
-	auth : {						//Optional
-		method: 'jwt',				//Default 'jwt'
-		function: null				//Default null
+	Joi, //Required
+	validationAllowUnknown: false, //Optional, default false
+	wrapResponse: true, //Optional, default true
+	auth : { //Optional
+		method: 'jwt', //Default 'jwt'
+		function: null //Default null
 	}
 });
 
