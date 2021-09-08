@@ -60,7 +60,15 @@ All HTTP endpoints paths and methods, are pointed to the `server.handler`, which
 const slsRouter = require('serverless-aws-router');
 const Joi = require('joi');
 
-const server = new slsRouter.Server({ Joi });
+const server = new slsRouter.Server({
+	Joi,
+	validationAllowUnknown: false,  //Optional, default false
+	wrapResponse: true,				//Optional, default true
+	auth : {						//Optional
+		method: 'jwt',				//Default 'jwt'
+		function: null				//Default null
+	}
+});
 
 server.route({
 	method: 'GET',
@@ -447,6 +455,29 @@ Set custom **response headers**.
 ```javascript
 return reply.type('x-key', 'abcdef').response('Hello world');
 ```
+
+<br>
+
+`redirect(url: string, <statusCode: number>)` (optional) v1.0.11+
+
+Redirect the user to a specific URL. Status Code is optional, and will be set to `302` if no other is provided;
+
+Example:
+```javascript
+return reply.redirect('https://www.site.com'); //302 Found
+
+
+return reply.redirect('https://www.site.com', 301); //301 Moved Permanently
+```
+
+
+This method is equivalent to:
+```javascript
+return reply.raw().response(null).code(302).header('Location', 'https://www.site.com');
+```
+
+
+
 ## Request Lifecycle
 
 ![image](https://user-images.githubusercontent.com/12535965/118333232-5b718000-b4d9-11eb-908e-ee1928e1bb87.png)
