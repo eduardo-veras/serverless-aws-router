@@ -431,16 +431,16 @@ A code number greater or equal `400` will be be treated has an error, and will g
 
 ```javascript
 return reply.code(404).response('Hello world');
-// { "statusCode": 200, "error": "Not Found", "message": "Hello world" }
+// { "statusCode": 404, "error": "Not Found", "message": "Hello world" }
 
 return reply.code(412).response('Hello world');
-// { "statusCode": 200, "error": "Precondition Failed", "message": "Hello world" }
+// { "statusCode": 412, "error": "Precondition Failed", "message": "Hello world" }
 
 return reply.code(416).response('Hello world');
-// { "statusCode": 200, "error": "Range Not Satisfiable", "message": "Hello world" }
+// { "statusCode": 416, "error": "Range Not Satisfiable", "message": "Hello world" }
 
 return reply.code(417).response('Hello world');
-// { "statusCode": 200, "error": "Expectation Failed", "message": "Hello world" }
+// { "statusCode": 417, "error": "Expectation Failed", "message": "Hello world" }
 ```
 
 <br>
@@ -464,7 +464,33 @@ return reply.type('text/html').raw().response('<html><h1>Hello world</h1></html>
 Set custom **response headers**.
 
 ```javascript
-return reply.type('x-key', 'abcdef').response('Hello world');
+return reply.header('x-key', 'abcdef').response('Hello world');
+```
+
+ <br>
+ <br>
+
+`meta(key: string, value: any)` (optional) v1.0.14+
+
+Add extra keys on the response object.
+
+Note: This option will not be renders if you use with `reply.raw()` or `server.options.wrapResponse = false`.
+
+```javascript
+return reply.response('Hello world').extra('link', 'www.com');
+// { "statusCode": 200, "response": "Hello world", "link": "www.com" }
+
+return reply.response('Hello world').extra('self', true);
+// { "statusCode": 200, "response": "Hello world", "self": true }
+
+return reply.response('Hello world').extra('page', { current: 1 });
+// { "statusCode": 200, "response": "Hello world", "page": { "current": 1 } }
+
+return reply.response('Hello world').extra('related', [1, 2, 3]);
+// { "statusCode": 200, "response": "Hello world", "related": [1, 2, 3] }
+
+return reply.response('Hello world').extra('page', { current: 1 }).extra('self', true);
+// { "statusCode": 200, "response": "Hello world", "page": { "current": 1 }, "self": true }
 ```
 
 <br>

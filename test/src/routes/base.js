@@ -12,6 +12,13 @@ module.exports.register = (server) => {
 		}
 	});
 
+	server.route({
+		method: 'GET',
+		path: '/meta',
+		handler: async (request, reply) => {
+			return reply.response({ ok: true }).meta('page', { actual : 1 });
+		}
+	});
 
 	server.route({
 		method: 'GET',

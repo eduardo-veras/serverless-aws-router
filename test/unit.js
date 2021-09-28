@@ -48,6 +48,28 @@ describe('GET /', () => {
 	});
 });
 
+describe('GET /meta', () => {
+	it('it should have status 200', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/meta')
+			.end((err, res) => {
+				res.should.have.status(200);
+				done();
+			});
+	});
+	it('it should return response, { page: { actual: 1 } }', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/meta')
+			.end((err, res) => {
+				res.should.have.status(200);
+				res.body.should.be.a('object');
+				res.body.should.have.property('page');
+				res.body.page.should.have.property('actual').eql(1);
+				done();
+			});
+	});
+});
+
 describe('GET /validation', () => {
 	it('it should have status 412', (done) => {
 		chai.request('http://localhost:8080')
