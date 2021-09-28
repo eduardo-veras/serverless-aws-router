@@ -62,7 +62,11 @@ const Joi = require('joi');
 
 const server = new slsRouter.Server({
 	Joi, //Required
-	validationAllowUnknown: false, //Optional, default false
+	joiOptions : { //Optional
+		abortEarly: true, //Optional
+		allowUnknown: false, //Optional
+		cache: true //Optional
+	},
 	wrapResponse: true, //Optional, default true
 	auth : { //Optional
 		method: 'jwt', //Default 'jwt'
@@ -88,10 +92,17 @@ The server options control the behavior of the server object.
 ##### server.options.Joi `object | mandatory`
 To avoid versioning problems between the Joi library, add the [Joi](https://www.npmjs.com/package/joi) package globally in you project, and pass it when you are creating a new server.
 
-##### server.options.validationAllowUnknown `boolean | optional` (v1.0.10+)
+##### server.options.validationAllowUnknown `deprecated` `boolean | optional` (v1.0.10+)
 Default value: `false`
 
 When `true`, allows `Joi` validation object to contain unknown keys which are ignored.
+
+Note: This option was deprecated, please use `joiOptions.allowUnknown` instead.
+
+##### server.options.joiOptions `object | optional` (v1.0.13+)
+Default value: `undefied`
+
+Overwrite `Joi` default options, please see [Joi documentation](https://joi.dev/api/#anyvalidatevalue-options) for all possible options.
 
 ##### server.options.wrapResponse `boolean | optional` (v1.0.7+)
 Default value: `true`

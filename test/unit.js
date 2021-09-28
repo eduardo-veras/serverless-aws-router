@@ -76,6 +76,14 @@ describe('GET /validationSchema', () => {
 				done();
 			});
 	});
+	it('extra key, it should have status 412', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/validationSchema?page=1&extra=1')
+			.end((err, res) => {
+				res.should.have.status(412);
+				done();
+			});
+	});
 	it('it should have status 200', (done) => {
 		chai.request('http://localhost:8080')
 			.get('/validationSchema?page=1')
