@@ -548,6 +548,16 @@ server.on('onPostHandler', async payload => {
 server.on('onPreResponse', async (response, event) => {
   console.log('onPreResponse', event);
   console.log('onPreResponse', response);
+
+  /*
+  response.error <default:null> v1.0.15+
+  In case the script fails, this field return the raw error object.
+  Good to create custom error messages on the response.
+  */
+  if(response.error){
+    console.error(response.error);
+  }
+
 });
 ```
 
