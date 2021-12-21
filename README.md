@@ -71,7 +71,8 @@ const server = new slsRouter.Server({
 	auth : { //Optional
 		method: 'jwt', //Default 'jwt'
 		function: null //Default null
-	}
+	},
+	parseQueryString: false //Optional, default false (v1.1.0+)
 });
 
 server.route({
@@ -110,6 +111,63 @@ Default value: `true`
 Used to indicate if all responses data should be wraped before the final response.
 
 If set to `false` the `reply` will always act as `reply.raw().response(content)`.
+
+##### server.options.parseQueryString `boolean | optional` (v1.1.0+)
+Default value: `false`
+
+If set to `true` the system will auto try to parse first the query string values using `JSON.parse()` and then parse the fields using [qs.parse()](https://github.com/ljharb/qs).
+
+
+When is `false`:
+```javascript
+// GET /endpoint?foo[bar]=baz
+request.query = {
+	"foo[bar]": "baz"
+};
+```
+
+When is `true`:
+```javascript
+// GET /endpoint?foo[bar]=baz
+request.query = {
+	"foo": {
+		"bar": "baz"
+	}
+};
+
+// GET /endpoint?foo[bar]=1&foo[baz]=2
+request.query = {
+	"foo": {
+		"bar": 1,
+		"baz": 2
+	}
+};
+
+// GET /endpoint?foo[bar][baz]=foobarbaz
+request.query = {
+	"foo": {
+		"bar": {
+			"baz": "foobarbaz"
+		}
+	}
+};
+
+// GET /endpoint?foo={"bar": "baz"}
+request.query = {
+	"foo": {
+		"bar": "baz"
+	}
+};
+
+// GET /endpoint?foo[bar]={"baz": "foobarbaz"}
+request.query = {
+	"foo": {
+		"bar": {
+			"baz": "foobarbaz"
+		}
+	}
+};
+```
 
 ##### server.options.auth `object | optional`
 Default value: `{ method : 'jwt', function : null }`
