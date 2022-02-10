@@ -70,6 +70,20 @@ describe('GET /meta', () => {
 	});
 });
 
+describe('GET /status202, { ok: true }', () => {
+	it('it should have status 202', (done) => {
+		chai.request('http://localhost:8080')
+			.get('/status202')
+			.end((err, res) => {
+				res.should.have.status(202);
+				res.body.should.be.a('object');
+				res.body.should.have.property('response');
+				res.body.response.should.have.property('ok').eql(true);
+				done();
+			});
+	});
+});
+
 describe('GET /validation', () => {
 	it('it should have status 412', (done) => {
 		chai.request('http://localhost:8080')

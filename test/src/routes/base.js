@@ -35,6 +35,14 @@ module.exports.register = (server) => {
 
 	server.route({
 		method: 'GET',
+		path: '/status202',
+		handler: async (request, reply) => {
+			return reply.response({ ok: true }).code(202);
+		}
+	});
+
+	server.route({
+		method: 'GET',
 		path: '/validationSchema',
 		config: {
 			validate:{
