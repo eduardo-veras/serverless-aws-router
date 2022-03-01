@@ -22,8 +22,11 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
 
-    - name: npm install and test
+    - name: npm install
       run: |
-        npm install -g serverless@2.43.0
+        npm install -g serverless@3.7.0
         npm install
+
+    - name: npm test
+      run: |
         npm test
