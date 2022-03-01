@@ -18,11 +18,11 @@ const tokens = {
 	valid : jwt.sign({ active : true }, JWT_SECRET, { "issuer" : JWT_ISSUER })
 };
 
-const subprocess = exec('sls offline start --config test/src/serverless.yml');
+const subprocess = exec('npx serverless offline start --config serverless-test.yml --verbose');
 before(function (done) {
 	subprocess.stdout.on('data', (data) => {
-		if(data.indexOf('server ready')>0)
-			done();
+		if(data.indexOf('ANY |')>0)
+			setTimeout(() => { done(); }, 1000);
 	});
 });
 

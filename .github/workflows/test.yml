@@ -7,13 +7,13 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  test-nodejs:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x]
-    
+        node-version: [12.x, 14.x, 16.x]
+
     steps:
     - uses: actions/checkout@v2
 
@@ -24,7 +24,6 @@ jobs:
 
     - name: npm install
       run: |
-        npm install -g serverless@2.43.0
         npm install
 
     - name: npm test
