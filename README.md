@@ -404,6 +404,57 @@ Request object model:
 }
 ```
 
+##### request: multipart/form-data (v1.2.0+)
+
+When a request is made with the header `Content-Type` equals to `multipart/form-data`, and there's a file uploaded, the router will parse the request and convert it into a [Buffer](https://nodejs.org/docs/latest/api/buffer.html).
+
+Let's use the following request example:
+
+```shell
+curl --location --request POST 'https://yourapi.com/upload' \
+--form 'my_image=@"/home/user/screenshot.png"' \
+--form 'my_field="Hello!"'
+```
+
+Where the request is sending a `my_image` with a image file, and `my_field` with a text field.
+
+On `request.payload` you will get:
+```json
+{
+  "my_image": {
+    "type": "file",
+    "filename": "screenshot.png",
+    "contentType": "image/png",
+    "content": <Buffer 89 50 4e 47 0d 0a 1a 0a 00 00 00 0d 49 48 44 52 00 00 04 98 00 00 01 b6 08 02 00 00 00 bc a8 ab 06 00 00 00 03 73 42 49 54 08 08 08 db e1 4f e0 00 00 ... 4406 more bytes>
+  },
+  "my_field": "Hello!"
+}
+```
+
+The router will also parse the field names into objects, as:
+
+```shell
+curl --location --request POST 'https://yourapi.com/upload' \
+--form 'my_field[a]=@"/home/user/list.csv"' \
+--form 'my_field[b]="Hello!"'
+```
+
+Will be converted to:
+```json
+{
+  "my_field": {
+    "a": {
+      "type": "file",
+      "filename": "list.csv",
+      "contentType": "text/csv",
+      "content": <Buffer 74 65 73 74 0a>
+    },
+    "b": "Hello!"
+  }
+}
+```
+
+
 ##### reply
 
 The reply parameter, is an option to parse and manipulate the handler's response.
