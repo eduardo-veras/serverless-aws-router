@@ -24,6 +24,7 @@ jobs:
 
     - name: npm install
       run: |
+        npm install -g serverless@3.19.0
         npm install
 
     - name: npm test
