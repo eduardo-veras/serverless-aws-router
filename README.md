@@ -4,6 +4,8 @@
 
 This project aims to be a lightweight router system for [Serverless framework](https://serverless.com) for AWS Lambda. The code design was inspired on [Hapi](https://hapi.dev) framework, and try to mimic the routes, validations, requests and response models of traditional NodeJS router frameworks.
 
+## Documentation and options
+All configuration options, methods, and events can be found on the [Wiki](../../wiki) section on this repo.
 
 ## Install
 ```bash
@@ -70,9 +72,6 @@ server.route({
 module.exports.handler = (event, context, callback) => server.handler(event, context, callback);
 ```
 First create a new `slsRouter.Server()`, then add your routes to the server, and finally export the `server.handler()` that will receive the serverless requests.
-
-## Documentation and options
-All configuration options, methods, and events can be found on the [Wiki](../../wiki) section on this repo.
 
 ## Examples
 You can find some usage examples on the [test](/test) folder on this repo.
