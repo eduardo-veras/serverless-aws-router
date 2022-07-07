@@ -27,8 +27,7 @@
 		"chai": "4.x.x",
 		"chai-http": "4.x.x",
 		"joi": "17.x.x",
-		"mocha": "9.x.x",
-		"serverless": "3.x.x",
+		"mocha": "10.x.x",
 		"serverless-offline": "8.x.x"
 	},
 	"scripts": {
