@@ -31,7 +31,7 @@
 		"serverless-offline": "8.x.x"
 	},
 	"scripts": {
-		"test": "./node_modules/mocha/bin/mocha test/unit.js --timeout 30000 --exit"
+		"test": "./node_modules/mocha/bin/_mocha test/unit.js --timeout 30000 --exit"
 	},
 	"license": "Apache-2.0"
 }
